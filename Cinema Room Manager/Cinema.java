@@ -8,12 +8,22 @@ public class Cinema {
     static int rows;
     static int seats;
     static int totalSeats;
+    static int soldTickets;
+    static int currentSale;
     static int maxIncome;
 
     public static void main(String[] args) {
         setRoom();
-        printRoom();
-        buyTicket();
+        while (true) {
+            printMenu();
+            int userOption = scanner.nextInt();
+            if (userOption == 1) printRoom();
+            else if (userOption == 2) buyTicket();
+            else if (userOption == 3) showStatistics();
+            else if (userOption == 0) {
+                break;
+            }
+        }
     }
 
     public static void setRoom(){
@@ -28,8 +38,18 @@ public class Cinema {
                 room[i][j] = 'S';
             }
         }
+        soldTickets = 0;
+        currentSale = 0;
         totalSeats = rows * seats;
         setMaxIncome();
+    }
+
+    public static void printMenu(){
+        System.out.println("""
+                \n1. Show the seats
+                2. Buy a ticket
+                3. Statistics
+                0. Exit""");
     }
 
     public static void buyTicket() {
@@ -47,7 +67,7 @@ public class Cinema {
         } else {
             getTicketPrice(row);
             room[row - 1][seat - 1] = 'B';
-            printRoom();
+            soldTickets++;
         }
     }
 
@@ -71,14 +91,24 @@ public class Cinema {
     public static void getTicketPrice(int row) {
         if (totalSeats <= 60) {
             System.out.println("Ticket price: $10");
+            currentSale += 10;
         } else {
             int frontHalf = rows / 2;
             if (row <= frontHalf) {
                 System.out.println("Ticket price: $10");
+                currentSale += 10;
             } else {
                 System.out.println("Ticket price: $8");
+                currentSale += 8;
             }
         }
+    }
+
+    public static void showStatistics(){
+        System.out.println("\nNumber of purchased tickets: " + soldTickets);
+        System.out.printf("Percentage: %.2f%%\n", ((soldTickets * 100) / (float)totalSeats));
+        System.out.println("Current income: $" + currentSale);
+        System.out.println("Total income: $" + maxIncome);
     }
 
     public static void setMaxIncome(){
