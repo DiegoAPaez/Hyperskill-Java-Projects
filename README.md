@@ -28,4 +28,7 @@ This project allows you to better understand the basic OOP, its main concepts su
 ### Bulls and Cows
 "Write your own advanced version of the classic code breaking game "Bulls and Cows". Start with recreating the original version of the game and then take it to a new level."
 
+### Chuck Norris Cipher Encoder
+"This project will allow us to deal with string and character variables and work with loops and conditional statements. Get familiar with the binary notation and data type conversion. Create an application for the unary representation and decoding of any text."
+
 </details>
